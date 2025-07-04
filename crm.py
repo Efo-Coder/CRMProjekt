@@ -38,7 +38,12 @@ def kunde_hinzufuegen():
     Verhindert das Hinzufügen von Kunden mit bereits existierendem Namen.
     """
     print("\n--- Kunden hinzufügen ---")
-    name = input("Name des Kunden: ")
+    while True:
+        name = input("Name des Kunden: ")
+        if name and name.isalpha():
+            break
+        else:
+            print("Ungültige Eingabe. Bitte versuchen Sie es erneut.")
 
     # Validierung für E-Mail: Schleife, bis ein gültiges Format eingegeben wird
     while True:
@@ -153,7 +158,7 @@ def katalog_speichern():
     try:
         with open(DATEINAME, 'w', encoding='utf-8') as f:
             json.dump(kunden, f, indent=4, ensure_ascii=False)
-        print(f"Katalog erfolgreich in '{DATEINAME}' gespeichert.")
+        print(f"\033[32mKatalog erfolgreich in\033[0m '\033[34m{DATEINAME}\033[0m' \033[32mgespeichert.\033[0m")
     except IOError as e:
         print(f"Fehler beim Speichern des Katalogs: {e}")
 
@@ -183,14 +188,14 @@ def zeige_menue():
     """
     Zeigt das Hauptmenü des CRM-Systems an.
     """
-    print("\n--- CRM Menü ---")
-    print("1. Kunde hinzufügen")
-    print("2. Kunden anzeigen")
-    print("3. Kunde suchen")
-    print("4. Kunde aktualisieren")
-    print("5. Kunde löschen")
-    print("6. Beenden")
-    print("----------------")
+    print("\n\033[30m---\033[0m \033[33mCRM Menü\033[0m \033[30m---\033[0m")
+    print("\033[36m1\033[0m. Kunde hinzufügen")
+    print("\033[36m2\033[0m. Kunden anzeigen")
+    print("\033[36m3\033[0m. Kunde suchen")
+    print("\033[36m4\033[0m. Kunde aktualisieren")
+    print("\033[36m5\033[0m. Kunde löschen")
+    print("\033[36m6\033[0m. Beenden")
+    print("\033[30m----------------\033[0m")
 
 def main():
     """
@@ -215,10 +220,10 @@ def main():
             kunde_loeschen()
         elif wahl == '6':
             katalog_speichern()
-            print("Programm wird beendet. Auf Wiedersehen!")
+            print("\033[32mProgramm wird beendet. Auf Wiedersehen!\033[0m")
             break
         else:
-            print("Ungültige Eingabe. Bitte versuchen Sie es erneut.")
+            print("\033[31mUngültige Eingabe. Bitte versuchen Sie es erneut.\033[0m")
 
 if __name__ == "__main__":
     main()
